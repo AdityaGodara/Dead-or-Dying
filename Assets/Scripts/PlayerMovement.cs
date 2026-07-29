@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+        //animator.SetLayerWeight(1, 0f);
 
         inputActions = new PlayerInputAction();
 
@@ -95,13 +96,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        float speed = moveInput.magnitude;
+        Vector3 localMove = transform.InverseTransformDirection(moveDirection);
+
+        animator.SetFloat(
+            "MoveX",
+            localMove.x,
+            animationDampTime,
+            Time.deltaTime);
+
+        animator.SetFloat(
+            "MoveY",
+            localMove.z,
+            animationDampTime,
+            Time.deltaTime);
 
         animator.SetFloat(
             "Speed",
-            speed,
+            moveInput.magnitude,
             animationDampTime,
-            Time.deltaTime
-        );
+            Time.deltaTime);
+
+        //Debug.Log($"MoveX: {localMove.x}  MoveY: {localMove.z}");
     }
 }

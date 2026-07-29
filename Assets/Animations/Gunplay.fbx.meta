@@ -34,7 +34,7 @@ ModelImporter:
       name: mixamo.com
       takeName: mixamo.com
       internalID: -203655887218126122
-      firstFrame: 0
+      firstFrame: 2.3
       lastFrame: 13
       wrapMode: 0
       orientationOffsetY: 0
@@ -54,7 +54,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.981264
+        functionName: DisableUpperBodyLayer
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: f29bc3d589c231f45bcf8b113966b66c, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
