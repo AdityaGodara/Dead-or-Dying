@@ -3,6 +3,7 @@ using UnityEngine;
 public class AnimationEventReciever : MonoBehaviour
 {
     [SerializeField] private Weapon weapon;
+    [SerializeField] private PlayerMovement playerMovement;
 
     public void FinishReload()
     {
@@ -17,5 +18,15 @@ public class AnimationEventReciever : MonoBehaviour
     public void DisableUpperBodyLayer()
     {
         weapon.DisableUpperBodyLayer();
+    }
+
+    public void PlayFootstep()
+    {
+        playerMovement.PlayFootstep();
+    }
+
+    public void PlayReloadSound()
+    {
+        weapon.PlayReloadSound();
     }
 }

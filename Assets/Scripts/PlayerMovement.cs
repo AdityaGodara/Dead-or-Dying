@@ -8,6 +8,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerAim playerAim;
 
     private Animator animator;
+    [SerializeField] private AudioClip footstepClip;
+    [SerializeField] private float footstepCooldown = 0.18f;
+    [SerializeField, Range(0f, 1f)]
+    private float footstepVolume = 0.35f;
+
+    private float nextFootstepTime;
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
@@ -117,5 +123,18 @@ public class PlayerMovement : MonoBehaviour
             Time.deltaTime);
 
         //Debug.Log($"MoveX: {localMove.x}  MoveY: {localMove.z}");
+    }
+
+    public void PlayFootstep()
+    {
+        if (moveInput.sqrMagnitude < 0.1f)
+            return;
+
+        if (Time.time < nextFootstepTime)
+            return;
+
+        nextFootstepTime = Time.time + footstepCooldown;
+
+        AudioManager.Instance.PlayFootstep(footstepClip, footstepVolume);
     }
 }

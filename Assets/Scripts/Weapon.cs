@@ -14,6 +14,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] private int magazineSize = 30;
     [SerializeField] private float reloadTime = 1.8f;
     [SerializeField] private AmmoUI ammoUI;
+    [SerializeField] private AudioClip gunShot;
+    [SerializeField] private AudioClip reloadSound;
+    [SerializeField, Range(0f, 1f)]
+    private float gunVolume = 0.8f;
+
+    [SerializeField, Range(0f, 1f)]
+    private float reloadVolume = 0.7f;
 
     private int currentAmmo;
     private bool isReloading;
@@ -72,6 +79,8 @@ public class Weapon : MonoBehaviour
         bullet.Initialize(
             firePoint.position,
             firePoint.rotation);
+
+        AudioManager.Instance.PlaySFX(gunShot, gunVolume);
 
         nextFireTime = Time.time + (1f / fireRate);
         currentAmmo--;
@@ -133,5 +142,10 @@ public class Weapon : MonoBehaviour
     public void DisableUpperBodyLayer()
     {
         animator.SetLayerWeight(1, 0f);
+    }
+
+    public void PlayReloadSound()
+    {
+        AudioManager.Instance.PlaySFX(reloadSound, reloadVolume);
     }
 }
